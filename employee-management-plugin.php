@@ -6,20 +6,19 @@ Description: A plugin for managing employees
 Version: 1.0
 Author: Stefan Bergfeldt
 Author URI: https://crswebb.se/
+Text Domain: crs-employee-management
 */
 
 // Define constants
-define('EMPLOYEE_MANAGEMENT_PLUGIN_DIR', plugin_dir_path(__FILE__));
-define('EMPLOYEE_MANAGEMENT_PLUGIN_URL', plugin_dir_url(__FILE__));
+define('CRS_EMPLOYEE_MANAGEMENT_PLUGIN_DIR', plugin_dir_path(__FILE__));
+define('CRS_EMPLOYEE_MANAGEMENT_PLUGIN_URL', plugin_dir_url(__FILE__));
 
 add_theme_support('post-thumbnails');
-function enqueue_scripts_and_styles()
+function crs_employee_management_enqueue_scripts_and_styles()
 {
     wp_enqueue_style('custom-admin-styles', plugins_url('/css/admin-styles.css', __FILE__));
-    // Enqueue media scripts for image upload
     wp_enqueue_media();
 
-    // Enqueue custom script for handling image upload
     wp_enqueue_script('my-plugin-script', plugins_url('/js/my-plugin-script.js', __FILE__), array('jquery'), '1.0', true);
     // Localize the JavaScript file with necessary values
     wp_localize_script(
@@ -30,36 +29,42 @@ function enqueue_scripts_and_styles()
         )
     );
 }
-add_action('admin_enqueue_scripts', 'enqueue_scripts_and_styles');
+add_action('admin_enqueue_scripts', 'crs_employee_management_enqueue_scripts_and_styles');
 
-function my_plugin_enqueue_styles()
+function crs_employee_management_enqueue_styles()
 {
     wp_enqueue_style('my-plugin-styles', plugins_url('/css/plugin-styles.css', __FILE__));
 }
-add_action('wp_enqueue_scripts', 'my_plugin_enqueue_styles');
+add_action('wp_enqueue_scripts', 'crs_employee_management_enqueue_styles');
+
+function crs_employee_management_load_textdomain() {
+    load_plugin_textdomain( 'crs-employee-management', false, basename( dirname( __FILE__ ) ) . '/languages' ); 
+}
+
+add_action( 'plugins_loaded', 'crs_employee_management_load_textdomain' );
 
 function register_employee_post_type()
 {
 
     $labels = array(
-        'name' => __('Employees', 'text-domain'),
-        'singular_name' => __('Employee', 'text-domain'),
-        'add_new' => __('Add New', 'text-domain'),
-        'add_new_item' => __('Add New Employee', 'text-domain'),
-        'edit_item' => __('Edit Employee', 'text-domain'),
-        'new_item' => __('New Employee', 'text-domain'),
-        'view_item' => __('View Employee', 'text-domain'),
-        'search_items' => __('Search Employees', 'text-domain'),
-        'not_found' => __('No Employees found', 'text-domain'),
-        'not_found_in_trash' => __('No Employees found in Trash', 'text-domain'),
-        'parent_item_colon' => __('Parent Employee:', 'text-domain'),
-        'menu_name' => __('Employees', 'text-domain'),
+        'name' => __('Employees', 'crs-employee-management'),
+        'singular_name' => __('Employee', 'crs-employee-management'),
+        'add_new' => __('Add New', 'crs-employee-management'),
+        'add_new_item' => __('Add New Employee', 'crs-employee-management'),
+        'edit_item' => __('Edit Employee', 'crs-employee-management'),
+        'new_item' => __('New Employee', 'crs-employee-management'),
+        'view_item' => __('View Employee', 'crs-employee-management'),
+        'search_items' => __('Search Employees', 'crs-employee-management'),
+        'not_found' => __('No Employees found', 'crs-employee-management'),
+        'not_found_in_trash' => __('No Employees found in Trash', 'crs-employee-management'),
+        'parent_item_colon' => __('Parent Employee:', 'crs-employee-management'),
+        'menu_name' => __('Employees', 'crs-employee-management'),
     );
 
     $args = array(
         'labels' => $labels,
         'hierarchical' => false,
-        'description' => 'Employees',
+        'description' => __('Employees', 'crs-employee-management'),
         'taxonomies' => array('employee_category'),
         'public' => true,
         'show_ui' => true,
@@ -146,19 +151,19 @@ function employee_fields_callback($post)
 
     ?>
     <div>
-        <label for="employee_title">Title:</label>
+        <label for="employee_title"><?php _e('Title:', 'crs-employee-management'); ?></label>
         <input type="text" id="employee_title" name="employee_title" value="<?php echo $employee_title; ?>">
     </div>
     <div>
-        <label for="employee_email">Email:</label>
+        <label for="employee_email"><?php _e('E-mail:', 'crs-employee-management'); ?></label>
         <input type="email" id="employee_email" name="employee_email" value="<?php echo $employee_email; ?>">
     </div>
     <div>
-        <label for="employee_phone">Phone:</label>
+        <label for="employee_phone"><?php _e('Phone:', 'crs-employee-management'); ?></label>
         <input type="text" id="employee_phone" name="employee_phone" value="<?php echo $employee_phone; ?>">
     </div>
     <div>
-        <label for="employee_description">Short Description:</label>
+        <label for="employee_description"><?php _e('Short description', 'crs-employee-management'); ?></label>
         <textarea id="employee_description" name="employee_description"><?php echo $employee_description; ?></textarea>
     </div>
     <?php
