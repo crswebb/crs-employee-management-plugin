@@ -1,0 +1,17 @@
+  .employees {
+    margin-top: 20px;
+    width: 100%; /* Set the width to 100% so it takes up the entire row */
+    margin-bottom: 20px; /* Add some spacing between the rows */
+    display: flex; /* Make the rows flex items */
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .employee {
+    flex: 0 0 250px;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  }
+  

@@ -1,0 +1,51 @@
+#employee_fields .inside div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+#employee_fields .inside label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+#employee_fields .inside input[type="email"],
+#employee_fields .inside input[type="text"],
+#employee_fields .inside textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-shadow: none;
+    transition: all 0.3s ease;
+}
+
+#employee_fields .inside input[type="email"]:focus,
+#employee_fields .inside input[type="text"]:focus,
+#employee_fields .inside textarea:focus {
+    border-color: #1e90ff;
+    box-shadow: 0 0 5px rgba(30, 144, 255, 0.5);
+}
+
+#employee_fields .inside input[type="submit"] {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #1e90ff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    box-shadow: none;
+    cursor: pointer;
+}
+
+#employee_fields .inside input[type="submit"]:hover {
+    background-color: #007bff;
+}
+
+#employee_fields .inside img {
+    max-width: 100%;
+    height: auto;
+    margin-top: 10px;
+    border-radius: 5px;
+}
