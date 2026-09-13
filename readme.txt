@@ -4,7 +4,7 @@ Tags: employees, staff, team, custom post type, directory
 Requires at least: 6.0
 Tested up to: 6.6
 Requires PHP: 7.4
-Stable tag: 1.0
+Stable tag: 1.0.0
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 
@@ -43,12 +43,12 @@ Yes. The text domain is `crs-employee-management` and translations live in the `
 
 == Changelog ==
 
-= 1.0 =
+= 1.0.0 =
 * Initial public release.
 * Employee custom post type, categories, custom fields, sort order and shortcodes.
 * Swedish (sv_SE) translation.
 
 == Upgrade Notice ==
 
-= 1.0 =
+= 1.0.0 =
 Initial release.

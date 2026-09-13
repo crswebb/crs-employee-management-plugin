@@ -1,8 +1,13 @@
-# Files and directories excluded from the package deployed to WordPress.org.
-# Everything not listed here is shipped to users.
+# Files and directories that should NOT be shipped to the WordPress.org
+# SVN repository / release zip. Everything else in the plugin root is deployed.
+
 /.git
 /.github
 /.claude
 /.gitignore
+/.gitattributes
 /.distignore
 /.wordpress-org
+/node_modules
+/README.md
+/CLAUDE.md
