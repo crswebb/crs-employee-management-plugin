@@ -290,14 +290,17 @@ function crs_employee_run_migration()
         )
     );
 
-    // Rename the taxonomy on existing term relationships:
-    // 'employee_category' -> 'crs_employee_category'.
+    // Rename the taxonomy on existing term relationships. The taxonomy key has
+    // changed over time: the original release registered 'employee-category'
+    // (hyphen) and a later revision used 'employee_category' (underscore). Both
+    // legacy keys are migrated to 'crs_employee_category'.
     // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- one-time schema migration; a direct UPDATE is required to rename legacy rows and caching does not apply.
     $wpdb->query(
         $wpdb->prepare(
-            "UPDATE {$wpdb->term_taxonomy} SET taxonomy = %s WHERE taxonomy = %s",
+            "UPDATE {$wpdb->term_taxonomy} SET taxonomy = %s WHERE taxonomy IN (%s, %s)",
             'crs_employee_category',
-            'employee_category'
+            'employee_category',
+            'employee-category'
         )
     );
 
