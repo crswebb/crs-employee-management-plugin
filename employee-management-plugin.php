@@ -4,9 +4,14 @@ Plugin Name: CRS Employee Management Plugin
 Plugin URI: https://github.com/crswebb/crs-employee-management-plugin
 Description: A plugin for managing employees
 Version: 1.0
+Requires at least: 6.0
+Requires PHP: 7.4
 Author: Stefan Bergfeldt
 Author URI: https://crswebb.se/
+License: MIT
+License URI: https://opensource.org/licenses/MIT
 Text Domain: crs-employee-management
+Domain Path: /languages
 */
 
 add_theme_support('post-thumbnails');

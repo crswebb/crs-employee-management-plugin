@@ -1,0 +1,37 @@
+name: Deploy to WordPress.org
+
+# Publishes the plugin to the WordPress.org SVN repository whenever a GitHub
+# Release is published. WordPress core then offers updates to installed sites
+# natively (driven by the "Stable tag" in readme.txt).
+#
+# Prerequisites (one-time setup):
+#   1. The plugin must be submitted to and approved on WordPress.org. The slug
+#      assigned at approval must match the SLUG value below.
+#   2. Add two repository secrets (Settings -> Secrets and variables -> Actions):
+#        SVN_USERNAME  - your WordPress.org account username
+#        SVN_PASSWORD  - your WordPress.org account password
+#
+# Releasing:
+#   Tag the release with the plain version number (e.g. 1.0.1, not v1.0.1) and
+#   make sure it matches both the "Version:" header in the main plugin file and
+#   the "Stable tag:" line in readme.txt, then publish a GitHub Release for it.
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  deploy:
+    name: Deploy to WordPress.org
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: WordPress Plugin Deploy
+        uses: 10up/action-wordpress-plugin-deploy@stable
+        env:
+          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+          # Must match the plugin slug assigned on WordPress.org.
+          SLUG: crs-employee-management

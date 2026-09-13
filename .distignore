@@ -1,0 +1,8 @@
+# Files and directories excluded from the package deployed to WordPress.org.
+# Everything not listed here is shipped to users.
+/.git
+/.github
+/.claude
+/.gitignore
+/.distignore
+/.wordpress-org
