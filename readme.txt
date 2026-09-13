@@ -39,7 +39,7 @@ Add the `[all_employees]` shortcode to any page or post. Use `[category_employee
 
 = Is the plugin translatable? =
 
-Yes. The text domain is `crs-employee-management` and translations live in the `/languages` folder. Swedish (sv_SE) is included.
+Yes. The text domain is `crs-employee-management-plugin` and translations live in the `/languages` folder. Swedish (sv_SE) is included.
 
 == Changelog ==
 
