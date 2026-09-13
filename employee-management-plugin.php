@@ -42,11 +42,9 @@ function crs_employee_management_enqueue_styles()
 }
 add_action('wp_enqueue_scripts', 'crs_employee_management_enqueue_styles');
 
-function crs_employee_management_load_textdomain() {
-    load_plugin_textdomain( 'crs-employee-management-plugin', false, basename( dirname( __FILE__ ) ) . '/languages' );
-}
-
-add_action( 'plugins_loaded', 'crs_employee_management_load_textdomain' );
+// Translations load automatically for WordPress.org-hosted plugins (and from
+// the bundled /languages folder via the Domain Path header on WordPress 6.7+),
+// so no load_plugin_textdomain() call is needed.
 
 function crs_register_employee_post_type()
 {
@@ -283,6 +281,7 @@ function crs_employee_run_migration()
     global $wpdb;
 
     // Rename the post type on existing posts: 'employee' -> 'crs_employee'.
+    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- one-time schema migration; a direct UPDATE is required to rename legacy rows and caching does not apply.
     $wpdb->query(
         $wpdb->prepare(
             "UPDATE {$wpdb->posts} SET post_type = %s WHERE post_type = %s",
@@ -293,6 +292,7 @@ function crs_employee_run_migration()
 
     // Rename the taxonomy on existing term relationships:
     // 'employee_category' -> 'crs_employee_category'.
+    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- one-time schema migration; a direct UPDATE is required to rename legacy rows and caching does not apply.
     $wpdb->query(
         $wpdb->prepare(
             "UPDATE {$wpdb->term_taxonomy} SET taxonomy = %s WHERE taxonomy = %s",
@@ -310,6 +310,7 @@ function crs_employee_run_migration()
         'employee_sorting_order' => 'crs_employee_sorting_order',
     );
     foreach ($meta_key_map as $old_key => $new_key) {
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- one-time schema migration; a direct UPDATE is required to rename legacy meta keys and caching does not apply.
         $wpdb->query(
             $wpdb->prepare(
                 "UPDATE {$wpdb->postmeta} SET meta_key = %s WHERE meta_key = %s",
