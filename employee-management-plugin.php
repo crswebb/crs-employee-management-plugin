@@ -9,10 +9,6 @@ Author URI: https://crswebb.se/
 Text Domain: crs-employee-management
 */
 
-// Define constants
-define('CRS_EMPLOYEE_MANAGEMENT_PLUGIN_DIR', plugin_dir_path(__FILE__));
-define('CRS_EMPLOYEE_MANAGEMENT_PLUGIN_URL', plugin_dir_url(__FILE__));
-
 add_theme_support('post-thumbnails');
 function crs_employee_management_enqueue_scripts_and_styles()
 {
@@ -90,7 +86,7 @@ add_action('init', 'register_employee_post_type');
 // Add custom fields for employee
 function employee_add_custom_fields()
 {
-    add_meta_box('employee_fields', 'Employee Fields', 'employee_fields_callback', 'employee', 'normal', 'high');
+    add_meta_box('employee_fields', __('Employee Fields', 'crs-employee-management'), 'employee_fields_callback', 'employee', 'normal', 'high');
 }
 add_action('add_meta_boxes', 'employee_add_custom_fields');
 
@@ -99,7 +95,7 @@ function add_employee_sorting_order_meta()
 {
     add_meta_box(
         'employee_sorting_order_meta',
-        'Employee Sorting Order',
+        __('Employee Sorting Order', 'crs-employee-management'),
         'render_employee_sorting_order_meta_box',
         'employee',
         // Custom post type for employees
@@ -152,19 +148,19 @@ function employee_fields_callback($post)
     ?>
     <div>
         <label for="employee_title"><?php _e('Title:', 'crs-employee-management'); ?></label>
-        <input type="text" id="employee_title" name="employee_title" value="<?php echo $employee_title; ?>">
+        <input type="text" id="employee_title" name="employee_title" value="<?php echo esc_attr($employee_title); ?>">
     </div>
     <div>
         <label for="employee_email"><?php _e('E-mail:', 'crs-employee-management'); ?></label>
-        <input type="email" id="employee_email" name="employee_email" value="<?php echo $employee_email; ?>">
+        <input type="email" id="employee_email" name="employee_email" value="<?php echo esc_attr($employee_email); ?>">
     </div>
     <div>
         <label for="employee_phone"><?php _e('Phone:', 'crs-employee-management'); ?></label>
-        <input type="text" id="employee_phone" name="employee_phone" value="<?php echo $employee_phone; ?>">
+        <input type="text" id="employee_phone" name="employee_phone" value="<?php echo esc_attr($employee_phone); ?>">
     </div>
     <div>
         <label for="employee_description"><?php _e('Short description', 'crs-employee-management'); ?></label>
-        <textarea id="employee_description" name="employee_description"><?php echo $employee_description; ?></textarea>
+        <textarea id="employee_description" name="employee_description"><?php echo esc_textarea($employee_description); ?></textarea>
     </div>
     <?php
 }
@@ -191,17 +187,17 @@ function register_employee_taxonomy()
 {
 
     $labels = array(
-        'name' => _x('Employee Categories', 'taxonomy general name'),
-        'singular_name' => _x('Employee Category', 'taxonomy singular name'),
-        'search_items' => __('Search Employee Categories'),
-        'all_items' => __('All Employee Categories'),
-        'parent_item' => __('Parent Employee Category'),
-        'parent_item_colon' => __('Parent Employee Category:'),
-        'edit_item' => __('Edit Employee Category'),
-        'update_item' => __('Update Employee Category'),
-        'add_new_item' => __('Add New Employee Category'),
-        'new_item_name' => __('New Employee Category Name'),
-        'menu_name' => __('Employee Categories'),
+        'name' => __('Employee Categories', 'crs-employee-management'),
+        'singular_name' => __('Employee Category', 'crs-employee-management'),
+        'search_items' => __('Search Employee Categories', 'crs-employee-management'),
+        'all_items' => __('All Employee Categories', 'crs-employee-management'),
+        'parent_item' => __('Parent Employee Category', 'crs-employee-management'),
+        'parent_item_colon' => __('Parent Employee Category:', 'crs-employee-management'),
+        'edit_item' => __('Edit Employee Category', 'crs-employee-management'),
+        'update_item' => __('Update Employee Category', 'crs-employee-management'),
+        'add_new_item' => __('Add New Employee Category', 'crs-employee-management'),
+        'new_item_name' => __('New Employee Category Name', 'crs-employee-management'),
+        'menu_name' => __('Employee Categories', 'crs-employee-management'),
     );
 
     $args = array(
@@ -216,7 +212,7 @@ function register_employee_taxonomy()
         'rewrite' => array('slug' => 'employee-category'),
     );
 
-    register_taxonomy('employee-category', array('employee'), $args);
+    register_taxonomy('employee_category', array('employee'), $args);
 }
 add_action('init', 'register_employee_taxonomy', 0);
 
