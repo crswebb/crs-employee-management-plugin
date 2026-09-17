@@ -11,7 +11,6 @@ Author URI: https://crswebb.se/
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 Text Domain: crs-employee-management-plugin
-Domain Path: /languages
 */
 
 defined('ABSPATH') || exit;
@@ -42,9 +41,8 @@ function crs_employee_management_enqueue_styles()
 }
 add_action('wp_enqueue_scripts', 'crs_employee_management_enqueue_styles');
 
-// Translations load automatically for WordPress.org-hosted plugins (and from
-// the bundled /languages folder via the Domain Path header on WordPress 6.7+),
-// so no load_plugin_textdomain() call is needed.
+// Translations are managed via translate.wordpress.org for hosted plugins, so
+// no bundled translation files or load_plugin_textdomain() call are needed.
 
 function crs_register_employee_post_type()
 {
