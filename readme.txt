@@ -20,10 +20,10 @@ Features:
 * Employee categories taxonomy for grouping.
 * Custom sort order per employee.
 * Shortcodes:
-    * `[all_employees]` – list every employee.
-    * `[category_employees category="slug"]` – list employees in a category.
-    * `[single_employee id="123"]` – show one employee.
-* Translation-ready. Ships with Swedish (sv_SE).
+    * `[crsemp_all_employees]` – list every employee.
+    * `[crsemp_category_employees category="slug"]` – list employees in a category.
+    * `[crsemp_single_employee id="123"]` – show one employee.
+* Translation-ready (translations are provided via translate.wordpress.org).
 
 == Installation ==
 
@@ -35,11 +35,11 @@ Features:
 
 = How do I display employees on a page? =
 
-Add the `[all_employees]` shortcode to any page or post. Use `[category_employees category="your-category-slug"]` to filter by category, or `[single_employee id="123"]` for a single employee.
+Add the `[crsemp_all_employees]` shortcode to any page or post. Use `[crsemp_category_employees category="your-category-slug"]` to filter by category, or `[crsemp_single_employee id="123"]` for a single employee.
 
 = Is the plugin translatable? =
 
-Yes. The text domain is `crs-employee-management-plugin` and translations live in the `/languages` folder. Swedish (sv_SE) is included.
+Yes. The plugin is fully internationalized (text domain `crs-employee-management-plugin`), and translations are provided through translate.wordpress.org.
 
 == Changelog ==
 
