@@ -65,7 +65,7 @@ function register_employee_post_type()
         'labels' => $labels,
         'hierarchical' => false,
         'description' => __('Employees', 'crs-employee-management'),
-        'taxonomies' => array('employee_category'),
+        'taxonomies' => array('employee-category'),
         'public' => true,
         'show_ui' => true,
         'show_in_menu' => true,
@@ -244,13 +244,18 @@ add_shortcode('all_employees', 'display_all_employees');
 
 function display_category_employees($atts)
 {
+    $atts = shortcode_atts(array('category' => ''), $atts, 'category_employees');
+    if (empty($atts['category'])) {
+        return '';
+    }
+
     ob_start();
     $args = array(
         'post_type' => 'employee',
         'posts_per_page' => -1,
         'tax_query' => array(
             array(
-                'taxonomy' => 'employee_category',
+                'taxonomy' => 'employee-category',
                 'field' => 'slug',
                 'terms' => $atts['category']
             )
@@ -274,6 +279,11 @@ add_shortcode('category_employees', 'display_category_employees');
 
 function display_single_employee($atts)
 {
+    $atts = shortcode_atts(array('id' => 0), $atts, 'single_employee');
+    if (empty($atts['id'])) {
+        return '';
+    }
+
     ob_start();
     $args = array(
         'post_type' => 'employee',
