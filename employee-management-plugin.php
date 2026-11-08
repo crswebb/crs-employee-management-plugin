@@ -372,6 +372,11 @@ add_shortcode('crsemp_all_employees', 'crsemp_display_all_employees');
 
 function crsemp_display_category_employees($atts)
 {
+    $atts = shortcode_atts(array('category' => ''), $atts, 'category_employees');
+    if (empty($atts['category'])) {
+        return '';
+    }
+
     ob_start();
     $args = array(
         'post_type' => 'crsemp_employee',
@@ -402,6 +407,11 @@ add_shortcode('crsemp_category_employees', 'crsemp_display_category_employees');
 
 function crsemp_display_single_employee($atts)
 {
+    $atts = shortcode_atts(array('id' => 0), $atts, 'single_employee');
+    if (empty($atts['id'])) {
+        return '';
+    }
+
     ob_start();
     $args = array(
         'post_type' => 'crsemp_employee',
